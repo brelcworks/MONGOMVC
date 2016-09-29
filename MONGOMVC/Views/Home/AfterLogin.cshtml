@@ -1,0 +1,7 @@
+﻿@{
+    ViewBag.Title = "AfterLogin";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<fieldset>
+    <h4>Welcome @(Request.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest")</h4>
+</fieldset>
