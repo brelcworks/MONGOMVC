@@ -9,7 +9,7 @@ namespace MONGOMVC.Models
     public class TABLE2
     {
         public ObjectId _id { get; set; }
-        public int RID1 { get; set; }
+        public Int64 RID1 { get; set; }
         [DisplayName("RECORD NO")]
         public string RID { get; set; }
         [DisplayName("ITEM TYPE")]

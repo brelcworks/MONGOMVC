@@ -9,7 +9,7 @@ namespace MONGOMVC.Models
     public class SHEET1
     {
         public ObjectId _id { get; set; }
-        public int RID { get; set; }
+        public Int64 RID { get; set; }
         [DisplayName("PART NO")]
         public string PART_NO { get; set; }
         [DisplayName("PART NAME")]

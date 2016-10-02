@@ -95,7 +95,7 @@ namespace MONGOMVC.Controllers
             return RedirectToAction("List");
         }
 
-        public ActionResult delete_conf(int id)
+        public ActionResult delete_conf(Int64 id)
         {
             var database = client.GetDatabase("appharbor_9spxvctt");
             var collection = database.GetCollection<TABLE2>("STOCK");
@@ -109,14 +109,14 @@ namespace MONGOMVC.Controllers
         {
             var database = client.GetDatabase("appharbor_9spxvctt");
             var collection = database.GetCollection<TABLE2>("STOCK");
-            var STLIST = collection.Find(f => true).Count();
+            var STLIST = DateTime.Now.ToString("ddMMyyyyhhmmssfff");
             return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         public JsonResult gmid1(string aData)
         {
             var database = client.GetDatabase("appharbor_9spxvctt");
             var collection = database.GetCollection<SHEET1>("SHEET1");
-            var STLIST = collection.Find(f => true).Count();
+            var STLIST = DateTime.Now.ToString("ddMMyyyyhhmmssfff");
             return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         [Authorize]
@@ -258,7 +258,7 @@ namespace MONGOMVC.Controllers
         }
 
         [HttpPost]
-        public string crt([Bind(Exclude = "RID")] SHEET1 objPMR)
+        public string crt(SHEET1 objPMR)
         {
             string msg;
             try
@@ -281,7 +281,45 @@ namespace MONGOMVC.Controllers
             }
             return msg;
         }
-
+        public string edt(SHEET1 objPMR)
+        {
+            string msg;
+            try
+            {
+                var database = client.GetDatabase("appharbor_9spxvctt");
+                var collection = database.GetCollection<SHEET1>("SHEET1");
+                var builder = Builders<SHEET1>.Filter;
+                var filter = builder.Eq(s => s.RID, objPMR.RID);
+                var upd = Builders<SHEET1>.Update
+                    .Set("TYPE", objPMR.PART_NO)
+                    .Set("MRP", objPMR.MRP)
+                    .Set("QTY", objPMR.PARTI)
+                    .Set("TOTAL", objPMR.GROP)
+                    .Set("TAX", objPMR.CATE)
+                    .Set("TVAL", objPMR.DPCODE)
+                    .Set("STOTAL", objPMR.lmodi)
+                    .Set("PPRICE", objPMR.TRATE)
+                    .Set("UNIT", objPMR.rid1)
+                    .Set("SSTA", objPMR.unit)
+                    .Set("SPRICE", objPMR.AEDT);
+                var result = collection.UpdateOne(filter, upd);
+                msg = "Saved Successfully";
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+            }
+            return msg;
+        }
+        public string dlt(Int64 id)
+        {
+            var database = client.GetDatabase("appharbor_9spxvctt");
+            var collection = database.GetCollection<SHEET1>("SHEET1");
+            var builder = Builders<SHEET1>.Filter;
+            var filter = builder.Eq(s => s.RID, id);
+            var result = collection.DeleteOne(filter);
+            return "Deleted Successfully!";
+        }
         [Authorize]
         public ActionResult ExportData()
         {
