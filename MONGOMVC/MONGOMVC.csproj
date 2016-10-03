@@ -130,6 +130,10 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase">
+      <HintPath>..\packages\WindowsBase.4.6.1055.0\lib\WindowsBase.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
@@ -143,12 +147,14 @@
     <Compile Include="Controllers\BILLController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MyAccountController.cs" />
+    <Compile Include="Controllers\PopController.cs" />
     <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BILL.cs" />
     <Compile Include="Models\BILL1.cs" />
+    <Compile Include="Models\MAINPOPU.cs" />
     <Compile Include="Models\SHEET1.cs" />
     <Compile Include="Models\TABLE2.cs" />
     <Compile Include="Models\USER.cs" />
@@ -159,6 +165,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\jquery.jqGrid\ellipsis-xbl.xml" />
     <Content Include="Content\jquery.jqGrid\ui.jqgrid.css" />
     <Content Include="Content\JQWidgets\images\backgroundTop.png" />
@@ -982,6 +989,11 @@
     <Content Include="Scripts\i18n\grid.locale-tw.js" />
     <Content Include="Scripts\i18n\grid.locale-ua.js" />
     <Content Include="Scripts\i18n\grid.locale-vi.js" />
+    <Content Include="Scripts\INC\AD_PMR.js" />
+    <Content Include="Scripts\INC\demos.js" />
+    <Content Include="Scripts\INC\LST_POP.js" />
+    <Content Include="Scripts\INC\LST_RM.js" />
+    <Content Include="Scripts\INC\POP_EDT.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
     <Content Include="Scripts\jquery-3.1.0.min.js" />
     <Content Include="Scripts\jquery-3.1.0.slim.js" />
@@ -991,6 +1003,9 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.datetimepicker.full.js" />
+    <Content Include="Scripts\jquery.datetimepicker.js" />
+    <Content Include="Scripts\jquery.datetimepicker.min.js" />
     <Content Include="Scripts\jquery.jqGrid.js" />
     <Content Include="Scripts\jquery.jqGrid.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -1107,6 +1122,9 @@
     <Content Include="Views\Stock\Edit.cshtml" />
     <Content Include="Views\Stock\List_Pr1.cshtml" />
     <Content Include="Views\BILL\Create.cshtml" />
+    <Content Include="Views\BILL\List_sls1.cshtml" />
+    <Content Include="Views\Pop\List.cshtml" />
+    <Content Include="Views\Pop\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
