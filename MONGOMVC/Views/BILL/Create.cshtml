@@ -1910,9 +1910,16 @@
                             dataType: "json",
                             success: function (data) {
                                 var i = data.length;
-                                $.each(data, function (i, val) {
-                                    $('#txtTOTAL').val(val.TOTAL);
-                                });
+                                if (i > 0)
+                                {
+                                    $.each(data, function (i, val) {
+                                        $('#txtTOTAL').val(val.TOTAL);
+                                    });
+                                }
+                                else
+                                {
+                                    $('#txtTOTAL').val("0.00");
+                                }
                             },
                             error: function OnErrorCall(response) {
                                 alert(response.status + " " + response.statusText);

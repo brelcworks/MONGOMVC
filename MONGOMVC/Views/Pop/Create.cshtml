@@ -28,12 +28,13 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <fieldset>
-        <h6>ADD NEW POPULATION &nbsp; &nbsp; @Html.ActionLink("Back to List", "List")</h6>
+        <div class="form-inline"> <h6>ADD NEW POPULATION &nbsp; &nbsp; @Html.ActionLink("Back to List", "List") &nbsp; &nbsp; <input type="submit" value="Create" class="btn btn-success btn-xs" /></h6> </div>
         <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
             <tr>
                 <td>@Html.LabelFor(model => model.RID1)</td>
-                <td>
+                <td class="form-inline">
                     @Html.TextBoxFor(model => model.RID1, new { @class = "form-control input-xs", @id = "txtRID1" })
+                    @Html.TextBoxFor(model => model.RID, new { @class = "form-control input-xs", @id = "txtRID" })
                     @Html.ValidationMessageFor(model => model.RID1)
                 </td>
                 <td>@Html.LabelFor(model => model.RAT_PH)</td>
@@ -257,13 +258,9 @@
                     @Html.HiddenFor(model => model.DPCODE, new { @id = "txtDPCODE" })
                     @Html.HiddenFor(model => model.lmodi, new { @id = "txtLMODI" })
                     @Html.HiddenFor(model => model.AEDT, new { @id = "txtAEDT" })
-                    @Html.HiddenFor(model => model.RID, new { @id = "txtRID" })
                 </td>
             </tr>
         </table>
-        <p>
-            <input type="submit" value="Create" />
-        </p>
     </fieldset>
 }
 
