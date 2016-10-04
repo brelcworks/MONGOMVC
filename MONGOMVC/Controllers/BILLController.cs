@@ -812,8 +812,7 @@ namespace MONGOMVC.Controllers
             Response.Charset = "";
             System.Text.RegularExpressions.Match Rlst = System.Text.RegularExpressions.Regex.Match(BNO, "\\d+");
             FL1 = "INVOICE " + CUST + "- " + SNAME + "- " + Rlst.Value + ".xlsx";
-            string upfile = AppDomain.CurrentDomain.BaseDirectory + "App_Data/UPLOAD1/" + FL1;
-            using (SpreadsheetDocument document = SpreadsheetDocument.Create(upfile, SpreadsheetDocumentType.Workbook))
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(MS, SpreadsheetDocumentType.Workbook))
             {
                 WorkbookPart workbookPart = document.AddWorkbookPart();
                 workbookPart.Workbook = new Workbook();
@@ -1128,7 +1127,7 @@ namespace MONGOMVC.Controllers
 
             Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             Response.AddHeader("content-disposition", "attachment;filename=" + FL1);
-            Response.WriteFile(upfile);
+            MS.WriteTo(Response.OutputStream);
             Response.Flush();
             Response.End();
             return Content("OK");

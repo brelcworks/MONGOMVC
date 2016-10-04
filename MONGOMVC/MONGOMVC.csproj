@@ -155,6 +155,8 @@
     <Compile Include="Models\BILL.cs" />
     <Compile Include="Models\BILL1.cs" />
     <Compile Include="Models\MAINPOPU.cs" />
+    <Compile Include="Models\PMR.cs" />
+    <Compile Include="Models\PMRMODEL.cs" />
     <Compile Include="Models\SHEET1.cs" />
     <Compile Include="Models\TABLE2.cs" />
     <Compile Include="Models\USER.cs" />
@@ -1127,6 +1129,10 @@
     <Content Include="Views\BILL\List_sls1.cshtml" />
     <Content Include="Views\Pop\List.cshtml" />
     <Content Include="Views\Pop\Create.cshtml" />
+    <Content Include="Views\Pop\Details_P.cshtml" />
+    <Content Include="Views\Pop\Add_Pmr.cshtml" />
+    <Content Include="Views\Pop\View_PMR.cshtml" />
+    <Content Include="Views\Pop\PMR_Dtls.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\UPLOAD1\" />
