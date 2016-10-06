@@ -6,7 +6,7 @@
 }
 @section scripts
 {
-    <script src="~/Scripts/INC/POP_EDT.js"></script>
+  <script src="~/Scripts/INC/POP_EDT1.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
 }
 <style type="text/css">
@@ -51,34 +51,34 @@
             <tr>
                 <td>@Html.LabelFor(model => model.CNAME)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.CNAME, new { @class = "form-control input-xs", @id = "txtCNAME" })
+                    @Html.TextBoxFor(model => model.CNAME, new { @class = "form-control input-xs", @id = "txtCNAME", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.CNAME)
                 </td>
                 <td>@Html.LabelFor(model => model.PHASE)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.PHASE, new { @class = "form-control input-xs", @id = "txtPHASE" })
+                    @Html.TextBoxFor(model => model.PHASE, new { @class = "form-control input-xs", @id = "txtPHASE", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.PHASE)
                 </td>
                 <td>@Html.LabelFor(model => model.cnmake)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.cnmake, new { @class = "form-control input-xs", @id = "txtCNMAKE" })
+                    @Html.TextBoxFor(model => model.cnmake, new { @class = "form-control input-xs", @id = "txtCNMAKE", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.cnmake)
                 </td>
             </tr>
             <tr>
                 <td>@Html.LabelFor(model => model.SNAME)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.SNAME, new { @class = "form-control input-xs", @id = "txtSNAME" })
+                    @Html.TextBoxFor(model => model.SNAME, new { @class = "form-control input-xs", @id = "txtSNAME", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.SNAME)
                 </td>
                 <td>@Html.LabelFor(model => model.MODEL)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.MODEL, new { @class = "form-control input-xs", @id = "txtMODEL" })
+                    @Html.TextBoxFor(model => model.MODEL, new { @class = "form-control input-xs", @id = "txtMODEL", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.MODEL)
                 </td>
                 <td>@Html.LabelFor(model => model.sauto)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.sauto, new { @class = "form-control input-xs", @id = "txtSAUTO" })
+                    @Html.TextBoxFor(model => model.sauto, new { @class = "form-control input-xs", @id = "txtSAUTO", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.sauto)
                 </td>
             </tr>
@@ -102,7 +102,7 @@
             <tr>
                 <td>@Html.LabelFor(model => model.ADDR)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.ADDR, new { @class = "form-control input-xs", @id = "txtADDR" })
+                    @Html.TextBoxFor(model => model.ADDR, new { @class = "form-control input-xs", @id = "txtADDR", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.ADDR)
                 </td>
                 <td>@Html.LabelFor(model => model.DGNO)</td>
@@ -119,12 +119,12 @@
             <tr>
                 <td>@Html.LabelFor(model => model.DIST)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.DIST, new { @class = "form-control input-xs", @id = "txtDIST" })
+                    @Html.TextBoxFor(model => model.DIST, new { @class = "form-control input-xs", @id = "txtDIST", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.DIST)
                 </td>
                 <td>@Html.LabelFor(model => model.AMAKE)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.AMAKE, new { @class = "form-control input-xs", @id = "txtAMAKE" })
+                    @Html.TextBoxFor(model => model.AMAKE, new { @class = "form-control input-xs", @id = "txtAMAKE", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.AMAKE)
                 </td>
                 <td>@Html.LabelFor(model => model.lhmr)</td>
@@ -136,7 +136,7 @@
             <tr>
                 <td>@Html.LabelFor(model => model.STATE)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.STATE, new { @class = "form-control input-xs", @id = "txtSTATE" })
+                    @Html.TextBoxFor(model => model.STATE, new { @class = "form-control input-xs", @id = "txtSTATE", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.STATE)
                 </td>
                 <td>@Html.LabelFor(model => model.ALSN)</td>
@@ -153,7 +153,7 @@
             <tr>
                 <td>@Html.LabelFor(model => model.CPN)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.CPN, new { @class = "form-control input-xs", @id = "txtCPN" })
+                    @Html.TextBoxFor(model => model.CPN, new { @class = "form-control input-xs", @id = "txtCPN", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.CPN)
                 </td>
                 <td>@Html.LabelFor(model => model.FRAME)</td>
@@ -180,19 +180,19 @@
                 </td>
                 <td>@Html.LabelFor(model => model.SPIN)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.SPIN, new { @class = "form-control input-xs", @id = "txtSPIN" })
+                    @Html.TextBoxFor(model => model.SPIN, new { @class = "form-control input-xs", @id = "txtSPIN", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.SPIN)
                 </td>
             </tr>
             <tr>
                 <td>@Html.LabelFor(model => model.OEA)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.OEA, new { @class = "form-control input-xs", @id = "txtOEA" })
+                    @Html.TextBoxFor(model => model.OEA, new { @class = "form-control input-xs", @id = "txtOEA", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.OEA)
                 </td>
                 <td>@Html.LabelFor(model => model.llop)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.llop, new { @class = "form-control input-xs", @id = "txtLLOP" })
+                    @Html.TextBoxFor(model => model.llop, new { @class = "form-control input-xs", @id = "txtLLOP", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.llop)
                 </td>
                 <td>@Html.LabelFor(model => model.hmage)</td>
@@ -209,7 +209,7 @@
                 </td>
                 <td>@Html.LabelFor(model => model.solenoid)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.solenoid, new { @class = "form-control input-xs", @id = "txtSOLENOID" })
+                    @Html.TextBoxFor(model => model.solenoid, new { @class = "form-control input-xs", @id = "txtSOLENOID", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.solenoid)
                 </td>
                 <td>@Html.LabelFor(model => model.ahm)</td>
@@ -221,34 +221,34 @@
             <tr>
                 <td>@Html.LabelFor(model => model.AMC)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.AMC, new { @class = "form-control input-xs", @id = "txtAMC" })
+                    @Html.TextBoxFor(model => model.AMC, new { @class = "form-control input-xs", @id = "txtAMC", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.AMC)
                 </td>
                 <td>@Html.LabelFor(model => model.chalt)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.chalt, new { @class = "form-control input-xs", @id = "txtCHALT" })
+                    @Html.TextBoxFor(model => model.chalt, new { @class = "form-control input-xs", @id = "txtCHALT", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.chalt)
                 </td>
                 <td>@Html.LabelFor(model => model.DSTA)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.DSTA, new { @class = "form-control input-xs", @id = "txtDSTA" })
+                    @Html.TextBoxFor(model => model.DSTA, new { @class = "form-control input-xs", @id = "txtDSTA", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.DSTA)
                 </td>
             </tr>
             <tr>
                 <td>@Html.LabelFor(model => model.WARR)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.WARR, new { @class = "form-control input-xs", @id = "txtWARR" })
+                    @Html.TextBoxFor(model => model.WARR, new { @class = "form-control input-xs", @id = "txtWARR", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.WARR)
                 </td>
                 <td>@Html.LabelFor(model => model.starter)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.starter, new { @class = "form-control input-xs", @id = "txtSTARTER" })
+                    @Html.TextBoxFor(model => model.starter, new { @class = "form-control input-xs", @id = "txtSTARTER", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.starter)
                 </td>
                 <td>@Html.LabelFor(model => model.ACTION)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.ACTION, new { @class = "form-control input-xs", @id = "txtACTION" })
+                    @Html.TextBoxFor(model => model.ACTION, new { @class = "form-control input-xs", @id = "txtACTION", @style = "text-transform:uppercase" })
                     @Html.ValidationMessageFor(model => model.ACTION)
                 </td>
             </tr>

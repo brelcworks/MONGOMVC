@@ -33,12 +33,13 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <h6>ADD NEW ISSUE FOR SITE: &nbsp; @Html.DisplayFor(model => model.MAINPOP.SNAME) &nbsp; @Html.ActionLink("Back to List", "List")</h6>
+        <h6>ADD NEW ISSUE FOR SITE: &nbsp; @Html.DisplayFor(model => model.MAINPOP.SNAME) &nbsp; @Html.ActionLink("Back to List", "List") &nbsp; <input type="submit" value="Create" class="btn btn-success btn-xs" /></h6>
         <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
             <tr>
                 <td>@Html.LabelFor(model => model.PMRs.recid)</td>
-                <td>
+                <td class="form-inline">
                     @Html.TextBoxFor(model => model.PMRs.recid, new { @class = "form-control input-xs", @id = "txtRID" })
+                    @Html.TextBoxFor(model => model.PMRs.RECID1, new { @class = "form-control input-xs", @id = "txtRID1" })
                     @Html.ValidationMessageFor(model => model.PMRs.recid)
                 </td>
                 <td>@Html.LabelFor(model => model.PMRs.CUST)</td>
@@ -339,9 +340,6 @@
 
             @Html.HiddenFor(model => model.MAINPOP.DPCODE)
         </table>
-        <p>
-            <input type="submit" value="Create" />
-        </p>
     </fieldset>
 }
 

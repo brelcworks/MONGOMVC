@@ -17,8 +17,10 @@ namespace MONGOMVC.Models
         public string SID { get; set; }
         [DisplayName("CUSTOMER NAME")]
         public string CNAME { get; set; }
+        [Required]
         [DisplayName("SITE NAME")]
         public string SNAME { get; set; }
+        [Required]
         [DisplayName("ENGINE SR. NO")]
         public string ENS { get; set; }
         [DisplayName("ALT. SR. NO")]

@@ -42,6 +42,15 @@
                 $('#txtPOPLMODI').val(new Date($.now()))
                 $('#txtDOS').focus()
             });
+            $.ajax({
+                type: "GET",
+                url: "/Stock/gmid",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $('#txtRID1').val(data);
+                }
+            });
         },
         error: function OnErrorCall(response) {
             alert(response.status + " " + response.statusText);

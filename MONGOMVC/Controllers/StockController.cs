@@ -50,7 +50,7 @@ namespace MONGOMVC.Controllers
             return RedirectToAction("List");
         }
         [Authorize]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Int64 id)
         {
             try
             {

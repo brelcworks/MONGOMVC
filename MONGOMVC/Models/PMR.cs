@@ -16,10 +16,12 @@ namespace MONGOMVC.Models
         public string SNAME { get; set; }
         [DisplayName("ENGINE SR. NO")]
         public string ENGINE_No { get; set; }
+        [Required]
         [DisplayName("DATE OF ISSUE")]
         [DataType(System.ComponentModel.DataAnnotations.DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy hh:mm:ss tt}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> DOS { get; set; }
+        [Required]
         [DisplayName("ISSUE TYPE")]
         public string STYPE { get; set; }
         public string HMR { get; set; }
@@ -62,6 +64,7 @@ namespace MONGOMVC.Models
         public string SERV { get; set; }
         [DisplayName("REASON OF FAILURE")]
         public string RFAIL { get; set; }
+        [Required]
         [DisplayName("ISSUE STATUS")]
         public string STA { get; set; }
         [DisplayName("WARRANTY STATUS")]

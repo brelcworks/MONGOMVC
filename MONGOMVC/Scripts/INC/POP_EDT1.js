@@ -13,8 +13,8 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
-                $('#txtRID').val(data);
                 $('#txtRID1').val(data);
+                $('#txtRID').val(data);
                 $('#txtCNAME').focus();
             }
         });

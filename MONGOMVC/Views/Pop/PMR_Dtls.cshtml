@@ -1,4 +1,4 @@
-﻿@model MONGOMVC.Models.PMR
+﻿@model MONGOMVC.Models.PMRMODEL
 <style type="text/css">
     .input-xs {
         height: 22px;
@@ -27,7 +27,236 @@
         });
         $('#txtSTYPE').keypress(function (e) {
             if (e.keyCode == 13) {
-                alert("Hello");
+                $('#txtTTR').focus();
+                e.preventDefault();
+                var date1 = new Date($('#txtDOS').val())
+                var date2 = new Date($('#txtCDATI').val())
+                var difference_ms = date2 - date1;
+                difference_ms = difference_ms / 1000;
+                var seconds = Math.floor(difference_ms % 60);
+                difference_ms = difference_ms / 60;
+                var minutes = Math.floor(difference_ms % 60);
+                difference_ms = difference_ms / 60;
+                var hours = Math.floor(difference_ms % 24);
+                var days = Math.floor(difference_ms / 24);
+                var one_day = 1000 * 60 * 60 * 24;
+                var difference_ms1 = date2 - date1;
+                var day1 = difference_ms1 / one_day;
+                var tval = day1 * 24;
+                $('#txtTTR').val(tval.toFixed(0));
+                switch (true) {
+                    case (tval >= 72):
+                        $('#txtTSLOT').val(">72");
+                        break;
+                    case (tval >= 48):
+                        $('#txtTSLOT').val("48-72");
+                        break;
+                    case (tval >= 24):
+                        $('#txtTSLOT').val("24-48");
+                        break;
+                    case (tval >= 10):
+                        $('#txtTSLOT').val("10-24");
+                        break;
+                    default:
+                        $('#txtTSLOT').val("0-10");
+                }
+
+                var hm = $('#txtHMR').val();
+                switch (true) {
+                    case (hm >= 15000):
+                        $('#txtHMAGE').val(">15000");
+                        break;
+                    case (hm >= 12500):
+                        $('#txtHMAGE').val("12500-15000");
+                        break;
+                    case (hm >= 10000):
+                        $('#txtHMAGE').val("10000-12500");
+                        break;
+                    case (hm >= 7500):
+                        $('#txtHMAGE').val("7500-10000");
+                        break;
+                    case (hm >= 5000):
+                        $('#txtHMAGE').val("5000-7500");
+                        break;
+                    case (hm >= 2500):
+                        $('#txtHMAGE').val("2500-5000");
+                        break;
+                    default:
+                        $('#txtHMAGE').val("0-2500");
+                }
+            }
+        });
+        $('#txtTTR').keypress(function (e) {
+            if (e.keyCode == 13) {
+                $('#txtTSLOT').focus();
+                e.preventDefault();
+                var stp = $('#txtSTYPE').val();
+                if (stp == "OIL SERVICE") {
+                    var rat = $('#txtKVA').val();
+                    switch (rat) {
+                        case '7.5':
+                            $('#txtMETERIAL').val("1)LUBE OIL 7.5 LTR , 2)LUBE OIL FILTER 1 NOS , 3)FUEL FILTER 1 NOS");
+                            break;
+                        case '10':
+                            $('#txtMETERIAL').val("1)LUBE OIL 7.5 LTR , 2)LUBE OIL FILTER 1 NOS , 3)FUEL FILTER 1 NOS");
+                            break;
+                        case '15':
+                            $('#txtMETERIAL').val("1)LUBE OIL 8 LTR , 2)LUBE OIL FILTER 1 NOS , 3)FUEL FILTER 2 NOS");
+                            break;
+                        case '20':
+                            $('#txtMETERIAL').val("1)LUBE OIL 9.5 LTR , 2)LUBE OIL FILTER 1 NOS , 3)FUEL FILTER 2 NOS");
+                            break;
+                        case '25':
+                            $('#txtMETERIAL').val("1)LUBE OIL 9.5 LTR , 2)LUBE OIL FILTER 1 NOS , 3)FUEL FILTER 2 NOS");
+                            break;
+                        case '30':
+                            $('#txtMETERIAL').val("1)LUBE OIL 9.5 LTR , 2)LUBE OIL FILTER 1 NOS , 3)FUEL FILTER 2 NOS");
+                            break;
+                        case '35':
+                            $('#txtMETERIAL').val("1)LUBE OIL 9.5 LTR , 2)LUBE OIL FILTER 1 NOS , 3)FUEL FILTER 2 NOS");
+                            break;
+                        case '40':
+                            $('#txtMETERIAL').val("1)LUBE OIL 8 LTR , 2)LUBE OIL FILTER 1 NOS , 3)FUEL FILTER 2 NOS");
+                            break;
+                        case '50':
+                            $('#txtMETERIAL').val("1)LUBE OIL 8 LTR , 2)LUBE OIL FILTER 1 NOS , 3)FUEL FILTER 2 NOS");
+                            break;
+                        case '62.5':
+                            $('#txtMETERIAL').val("1)LUBE OIL 8 LTR , 2)LUBE OIL FILTER 1 NOS , 3)FUEL FILTER 2 NOS");
+                            break;
+                        default:
+                            $('#txtMETERIAL').val("FILL THE DATA MANUALLY");
+                            break;
+                    }
+                    $('#txtCCATE').val("ENGINE");
+                    $('#txtCNAT').val("NA");
+                    $('#txtSERV').val("NA");
+                    $('#txtSTA').val("CLOSED");
+                    $('#txtACTION').val("SERVICING DONE");
+                    $('#txtRFAIL').val("NA");
+                }
+            }
+        });
+        $('#txtSTA').keypress(function (e) {
+            if (e.keyCode == 13) {
+                $('#txtRFAIL').focus();
+                e.preventDefault();
+                var ser = $('#txtSERV').val();
+                var tt = $('#txtTTR').val();
+                if (ser == "MAJOR") {
+                    switch (true) {
+                        case (tt > 12):
+                            $('#txtSLA').val("OUT OF SLA");
+                            break;
+                        default:
+                            $('#txtSLA').val("WITHIN SLA");
+                            $('#txtRESLA').val("NA");
+                            break;
+                    }
+                }
+                else {
+                    switch (true) {
+                        case (tt > 6):
+                            $('#txtSLA').val("OUT OF SLA");
+                            break;
+                        default:
+                            $('#txtSLA').val("WITHIN SLA");
+                            $('#txtRESLA').val("NA");
+                            break;
+                    }
+                }
+            }
+        });
+        $('#txtRFAIL').keypress(function (e) {
+            if (e.keyCode == 13) {
+                $('#txtACTION').focus();
+                $('#txtDPCODE').val("A1587");
+                e.preventDefault();
+            }
+        });
+        $('#txtACTION').keypress(function (e) {
+            if (e.keyCode == 13) {
+                $('#txtPOPACTION').val($('#txtACTION').val());
+                $('#txtREPORT').focus();
+                e.preventDefault();
+            }
+        });
+        $('#txtTSLOT').keypress(function (e) {
+            if (e.keyCode == 13) {
+                $('#txtMETERIAL').focus();
+                e.preventDefault();
+            }
+        });
+        $('#txtCCATE').keypress(function (e) {
+            if (e.keyCode == 13) {
+                $('#txtCNAT').focus();
+                e.preventDefault();
+            }
+        });
+
+        $('#txtCNAT').keypress(function (e) {
+            if (e.keyCode == 13) {
+                $('#txtSERV').focus();
+                e.preventDefault();
+            }
+        });
+
+        $('#txtSERV').keypress(function (e) {
+            if (e.keyCode == 13) {
+                $('#txtSTA').focus();
+                e.preventDefault();
+            }
+        });
+        $('#txtRFAIL').keypress(function (e) {
+            if (e.keyCode == 13) {
+                $('#txtACTION').focus();
+                $('#txtDPCODE').val("A1587");
+                e.preventDefault();
+            }
+        });
+
+        $('#txtACTION').keypress(function (e) {
+            if (e.keyCode == 13) {
+                $('#txtPOPACTION').val($('#txtACTION').val());
+                $('#txtREPORT').focus();
+                e.preventDefault();
+            }
+        });
+
+        $('#txtREPORT').keypress(function (e) {
+            if (e.keyCode == 13) {
+                $('#txtTECHNICIAN').focus();
+                e.preventDefault();
+            }
+        });
+
+        $('#txtTECHNICIAN').keypress(function (e) {
+            if (e.keyCode == 13) {
+                $('#txtSLA').focus();
+                e.preventDefault();
+            }
+        });
+        $('#txtDOS').keypress(function (e) {
+            if (e.keyCode == 13) {
+                $('#txtCDATI').focus();
+                e.preventDefault();
+            }
+        });
+        $('#txtCDATI').keypress(function (e) {
+            if (e.keyCode == 13) {
+                $('#txtSTYPE').focus();
+                e.preventDefault();
+            }
+        });
+        $('#txtHMR').keypress(function (e) {
+            if (e.keyCode == 13) {
+                $('#txtSTYPE').focus();
+                e.preventDefault();
+            }
+        });
+        $('#txtMETERIAL').keypress(function (e) {
+            if (e.keyCode == 13) {
+                $('#txtCCATE').focus();
                 e.preventDefault();
             }
         });
@@ -55,274 +284,315 @@
 </script>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h4 class="modal-title" id="myModalLabel">DETAILS OF ISSUE</h4>
+    <h4 class="modal-title" id="myModalLabel"></h4>
 </div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
 <fieldset>
-    <h4>ISSUE DETAILS FOR SITE NAME: &nbsp; &nbsp; @Html.DisplayFor(model => model.SNAME) | &nbsp; SITE ID: &nbsp; &nbsp; @Html.DisplayFor(model => model.SID) &nbsp; &nbsp; @Html.ActionLink("Update", "edt_Pmr", new { id = Model.RECID1, ens = Model.ENGINE_No })</h4>
+    <h4>ISSUE DETAILS FOR SITE NAME: &nbsp; &nbsp; @Html.DisplayFor(model => model.PMRs.SNAME) | &nbsp; SITE ID: &nbsp; &nbsp; @Html.DisplayFor(model => model.PMRs.SID) &nbsp; &nbsp; | &nbsp; &nbsp; <input type="submit" value="Update" class="btn btn-success btn-xs" /></h4>
     <table class="table table-bordered table-hover table-responsive ui-front">
         <tr>
             <td>
                 <dl class="dl-horizontal">
-                    @*<dt>
-                            @Html.LabelFor(model => model.SID)
-                        </dt>
-                        <dd>
-                            @Html.TextBoxFor(model => model.SID)
-                        </dd>
-
-                        <dt>
-                            @Html.LabelFor(model => model.SNAME)
-                        </dt>
-                        <dd>
-                            @Html.TextBoxFor(model => model.SNAME)
-                        </dd>
-                        <dt>
-                            @Html.LabelFor(model => model.recid)
-                        </dt>
-                        <dd>
-                            @Html.TextBoxFor(model => model.recid)
-                        </dd>
-                        <dt>
-                            @Html.LabelFor(model => model.SSTA)
-                        </dt>
-                        <dd>
-                            @Html.TextBoxFor(model => model.SSTA)
-                        </dd>
-
-                        <dt>
-                            @Html.LabelFor(model => model.DPCODE)
-                        </dt>
-                        <dd>
-                            @Html.TextBoxFor(model => model.DPCODE)
-                        </dd>
-
-                        <dt>
-                            @Html.LabelFor(model => model.lmodi)
-                        </dt>
-                        <dd>
-                            @Html.TextBoxFor(model => model.lmodi)
-                        </dd>
-
-                        <dt>
-                            @Html.LabelFor(model => model.AEDT)
-                        </dt>
-                        <dd>
-                            @Html.TextBoxFor(model => model.AEDT)
-                        </dd>*@
-
                     <dt>
-                        @Html.LabelFor(model => model.CUST)
+                        @Html.LabelFor(model => model.PMRs.CUST)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.CUST, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.CUST, new { @class = "form-control input-xs", @id = "txtCUST" })
                     </dd>
                     <dt>
-                        @Html.LabelFor(model => model.ENGINE_No)
+                        @Html.LabelFor(model => model.PMRs.ENGINE_No)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.ENGINE_No, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.ENGINE_No, new { @class = "form-control input-xs", @id = "txtENS" })
                     </dd>
                     <dt>
-                        @Html.LabelFor(model => model.DGNO)
+                        @Html.LabelFor(model => model.PMRs.DGNO)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.DGNO, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.DGNO, new { @class = "form-control input-xs", @id = "txtDGNO" })
                     </dd>
                     <dt>
-                        @Html.LabelFor(model => model.KVA)
+                        @Html.LabelFor(model => model.PMRs.KVA)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.KVA, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.KVA, new { @class = "form-control input-xs", @id = "txtKVA" })
                     </dd>
                     <dt>
-                        @Html.LabelFor(model => model.MODEL)
+                        @Html.LabelFor(model => model.PMRs.MODEL)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.MODEL, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.MODEL, new { @class = "form-control input-xs", @id = "txtMODEL" })
                     </dd>
                     <dt>
-                        @Html.LabelFor(model => model.DOI)
+                        @Html.LabelFor(model => model.PMRs.DOI)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.DOI, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.DOI, new { @class = "form-control input-xs", @id = "txtDOI" })
                     </dd>
 
                     <dt>
-                        @Html.LabelFor(model => model.AMAKE)
+                        @Html.LabelFor(model => model.PMRs.AMAKE)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.AMAKE, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.AMAKE, new { @class = "form-control input-xs", @id = "txtAMAKE" })
                     </dd>
 
                     <dt>
-                        @Html.LabelFor(model => model.ALSN)
+                        @Html.LabelFor(model => model.PMRs.ALSN)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.ALSN, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.ALSN, new { @class = "form-control input-xs", @id = "txtALSN" })
                     </dd>
 
                     <dt>
-                        @Html.LabelFor(model => model.BSN)
+                        @Html.LabelFor(model => model.PMRs.BSN)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.BSN, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.BSN, new { @class = "form-control input-xs", @id = "txtBSN" })
                     </dd>
                     <dt>
-                        @Html.LabelFor(model => model.AMC)
+                        @Html.LabelFor(model => model.PMRs.AMC)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.AMC, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.AMC, new { @class = "form-control input-xs", @id = "txtAMC" })
                     </dd>
                     <dt>
-                        @Html.LabelFor(model => model.WARR)
+                        @Html.LabelFor(model => model.PMRs.WARR)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.WARR, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.WARR, new { @class = "form-control input-xs", @id = "txtWARR" })
                     </dd>
                     <dt>
-                        @Html.LabelFor(model => model.OEA)
+                        @Html.LabelFor(model => model.PMRs.OEA)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.OEA, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.OEA, new { @class = "form-control input-xs", @id = "txtOEA" })
                     </dd>
                     <dt>
-                        @Html.LabelFor(model => model.DIST)
+                        @Html.LabelFor(model => model.PMRs.DIST)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.DIST, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.DIST, new { @class = "form-control input-xs", @id = "txtDIST" })
                     </dd>
 
                     <dt>
-                        @Html.LabelFor(model => model.STATE)
+                        @Html.LabelFor(model => model.PMRs.STATE)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.STATE, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.STATE, new { @class = "form-control input-xs", @id = "txtSTATE" })
                     </dd>
                 </dl>
             </td>
             <td>
                 <dl class="dl-horizontal">
                     <dt>
-                        @Html.LabelFor(model => model.STYPE)
+                        @Html.LabelFor(model => model.PMRs.DOS)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.STYPE, new { @class = "form-control input-xs", @id = "txtSTYPE" })
+                        @Html.TextBoxFor(model => model.PMRs.DOS, new { @class = "form-control input-xs", @id = "txtDOS" })
                     </dd>
                     <dt>
-                        @Html.LabelFor(model => model.DOS)
+                        @Html.LabelFor(model => model.PMRs.CDATI)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.DOS, new { @class = "form-control input-xs", @id = "txtDOS" })
+                        @Html.TextBoxFor(model => model.PMRs.CDATI, new { @class = "form-control input-xs", @id = "txtCDATI" })
                     </dd>
                     <dt>
-                        @Html.LabelFor(model => model.CDATI)
+                        @Html.LabelFor(model => model.PMRs.HMR)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.CDATI, new { @class = "form-control input-xs", @id = "txtCDATI" })
+                        @Html.TextBoxFor(model => model.PMRs.HMR, new { @class = "form-control input-xs", @id = "txtHMR" })
                     </dd>
                     <dt>
-                        @Html.LabelFor(model => model.CCATE)
+                        @Html.LabelFor(model => model.PMRs.STYPE)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.CCATE, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.STYPE, new { @class = "form-control input-xs", @id = "txtSTYPE" })
                     </dd>
                     <dt>
-                        @Html.LabelFor(model => model.HMR)
+                        @Html.LabelFor(model => model.PMRs.TTR)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.HMR, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.TTR, new { @class = "form-control input-xs", @id = "txtTTR" })
                     </dd>
                     <dt>
-                        @Html.LabelFor(model => model.CNAT)
+                        @Html.LabelFor(model => model.PMRs.TSLOT)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.CNAT, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.TSLOT, new { @class = "form-control input-xs", @id = "txtTSLOT" })
                     </dd>
-
                     <dt>
-                        @Html.LabelFor(model => model.SERV)
+                        @Html.LabelFor(model => model.PMRs.METERIAL)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.SERV, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.METERIAL, new { @class = "form-control input-xs", @id = "txtMETERIAL" })
                     </dd>
-
                     <dt>
-                        @Html.LabelFor(model => model.RFAIL)
+                        @Html.LabelFor(model => model.PMRs.CCATE)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.RFAIL, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.CCATE, new { @class = "form-control input-xs", @id = "txtCCATE" })
                     </dd>
-
                     <dt>
-                        @Html.LabelFor(model => model.STA)
+                        @Html.LabelFor(model => model.PMRs.CNAT)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.STA, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.CNAT, new { @class = "form-control input-xs", @id = "txtCNAT" })
                     </dd>
 
                     <dt>
-                        @Html.LabelFor(model => model.ACTION)
+                        @Html.LabelFor(model => model.PMRs.SERV)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.ACTION, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.SERV, new { @class = "form-control input-xs", @id = "txtSERV" })
                     </dd>
 
                     <dt>
-                        @Html.LabelFor(model => model.TTR)
+                        @Html.LabelFor(model => model.PMRs.RFAIL)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.TTR, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.RFAIL, new { @class = "form-control input-xs", @id = "txtRFAIL" })
                     </dd>
 
                     <dt>
-                        @Html.LabelFor(model => model.SLA)
+                        @Html.LabelFor(model => model.PMRs.STA)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.SLA, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.STA, new { @class = "form-control input-xs", @id = "txtSTA" })
                     </dd>
 
                     <dt>
-                        @Html.LabelFor(model => model.TSLOT)
+                        @Html.LabelFor(model => model.PMRs.ACTION)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.TSLOT, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.ACTION, new { @class = "form-control input-xs", @id = "txtACTION" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.PMRs.SLA)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.PMRs.SLA, new { @class = "form-control input-xs", @id = "txtSLA" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.PMRs.RESLA)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.PMRs.RESLA, new { @class = "form-control input-xs", @id = "txtRESLA" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.PMRs.Report)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.PMRs.Report, new { @class = "form-control input-xs", @id = "txtREPORT" })
                     </dd>
 
                     <dt>
-                        @Html.LabelFor(model => model.RESLA)
+                        @Html.LabelFor(model => model.PMRs.Technician)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.RESLA, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.Technician, new { @class = "form-control input-xs", @id = "txtTECHNICIAN" })
                     </dd>
                     <dt>
-                        @Html.LabelFor(model => model.Report)
+                        @Html.LabelFor(model => model.PMRs.REM)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.Report, new { @class = "form-control input-xs" })
-                    </dd>
-
-                    <dt>
-                        @Html.LabelFor(model => model.Technician)
-                    </dt>
-                    <dd>
-                        @Html.TextBoxFor(model => model.Technician, new { @class = "form-control input-xs", @id = "txtTECHNICIAN" })
-                    </dd>
-
-                    <dt>
-                        @Html.LabelFor(model => model.METERIAL)
-                    </dt>
-                    <dd>
-                        @Html.TextBoxFor(model => model.METERIAL, new { @class = "form-control input-xs" })
-                    </dd>
-                    <dt>
-                        @Html.LabelFor(model => model.REM)
-                    </dt>
-                    <dd>
-                        @Html.TextBoxFor(model => model.REM, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.PMRs.REM, new { @class = "form-control input-xs", @id = "txtREM" })
                     </dd>
                 </dl>
             </td>
         </tr>
+        <tr>
+            <td colspan="2">
+                @Html.HiddenFor(model => model.PMRs.recid, new { @class = "form-control input-xs", @id = "txtRID" })
+                @Html.HiddenFor(model => model.PMRs.RECID1, new { @class = "form-control input-xs", @id = "txtRID1" })
+                @Html.HiddenFor(model => model.PMRs.DPCODE, new { @class = "form-control input-xs", @id = "txtDPCODE" })
+                @Html.HiddenFor(model => model.PMRs.SID, new { @class = "form-control input-xs", @id = "txtSID" })
+                @Html.HiddenFor(model => model.MAINPOP.RID)
+                @Html.HiddenFor(model => model.MAINPOP.lsd, new { @id = "txtPOPLSD" })
+                @Html.HiddenFor(model => model.MAINPOP.lhmr, new { @id = "txtPOPLHMR" })
+                @Html.HiddenFor(model => model.MAINPOP.CHMD, new { @id = "txtPOPCHMD" })
+                @Html.HiddenFor(model => model.MAINPOP.CHMR, new { @id = "txtPOPCHMR" })
+                @Html.HiddenFor(model => model.MAINPOP.CHMD, new { @id = "txtPOPCHMD1" })
+                @Html.HiddenFor(model => model.MAINPOP.CHMR, new { @id = "txtPOPCHMR1" })
+                @Html.HiddenFor(model => model.MAINPOP.lmodi, new { @id = "txtPOPLMODI" })
+                @Html.HiddenFor(model => model.MAINPOP.AEDT, new { @id = "txtPOPAEDT" })
+                @Html.HiddenFor(model => model.MAINPOP.SSTA, new { @id = "txtPOPSSTA" })
+                @Html.HiddenFor(model => model.MAINPOP.ENS, new { @id = "txtPOPENS" })
+
+                @Html.HiddenFor(model => model.MAINPOP.RID1)
+
+                @Html.HiddenFor(model => model.MAINPOP.RAT_PH)
+
+                @Html.HiddenFor(model => model.MAINPOP.cntype)
+
+                @Html.HiddenFor(model => model.MAINPOP.CNAME)
+
+                @Html.HiddenFor(model => model.MAINPOP.PHASE)
+
+                @Html.HiddenFor(model => model.MAINPOP.cnmake)
+
+                @Html.HiddenFor(model => model.MAINPOP.SNAME)
+
+                @Html.HiddenFor(model => model.MAINPOP.MODEL)
+
+                @Html.HiddenFor(model => model.MAINPOP.sauto)
+
+                @Html.HiddenFor(model => model.MAINPOP.SID)
+
+                @Html.HiddenFor(model => model.MAINPOP.ADDR)
+
+                @Html.HiddenFor(model => model.MAINPOP.DGNO)
+
+                @Html.HiddenFor(model => model.MAINPOP.DIST)
+
+                @Html.HiddenFor(model => model.MAINPOP.AMAKE)
+
+                @Html.HiddenFor(model => model.MAINPOP.STATE)
+
+                @Html.HiddenFor(model => model.MAINPOP.ALSN)
+
+                @Html.HiddenFor(model => model.MAINPOP.CPN)
+
+                @Html.HiddenFor(model => model.MAINPOP.FRAME)
+
+                @Html.HiddenFor(model => model.MAINPOP.PHNO)
+
+                @Html.HiddenFor(model => model.MAINPOP.BSN)
+
+                @Html.HiddenFor(model => model.MAINPOP.SPIN)
+
+                @Html.HiddenFor(model => model.MAINPOP.OEA)
+
+                @Html.HiddenFor(model => model.MAINPOP.llop)
+
+                @Html.HiddenFor(model => model.MAINPOP.hmage, new { @id = "txtHMAGE" })
+
+                @Html.HiddenFor(model => model.MAINPOP.DOC, new { @id = "txtPOPDOC" })
+
+                @Html.HiddenFor(model => model.MAINPOP.solenoid)
+
+                @Html.HiddenFor(model => model.MAINPOP.ahm)
+
+                @Html.HiddenFor(model => model.MAINPOP.AMC)
+
+                @Html.HiddenFor(model => model.MAINPOP.chalt)
+
+                @Html.HiddenFor(model => model.MAINPOP.DSTA)
+
+                @Html.HiddenFor(model => model.MAINPOP.WARR)
+
+                @Html.HiddenFor(model => model.MAINPOP.starter)
+
+                @Html.HiddenFor(model => model.MAINPOP.ACTION, new { @id = "txtPOPACTION" })
+
+                @Html.HiddenFor(model => model.MAINPOP.DPCODE)
+                @Html.HiddenFor(model => model.MAINPOP.nsd, new { @class = "form-control input-xs", @id = "txtNSD" })
+            </td>
+        </tr>
     </table>
 </fieldset>
+}
 
