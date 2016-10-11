@@ -1,0 +1,275 @@
+﻿@model IEnumerable<MONGOMVC.Models.PMR>
+@{
+    ViewBag.Title = "PM / CM MANAGEMENT";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+@section scripts {
+    <script src="~/Scripts/INC/LST_RM.js"></script>
+}
+<h6>PM / CM MANAGEMENT</h6>
+<table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
+    <tr>
+        <td>
+            <div id="grid"></div>
+        </td>
+    </tr>
+</table>
+<div id='myModal' class='modal'>
+    <div class="modal-dialog" style="width:80%;background-color:lightcyan">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+<div id="popupWindow">
+    <div>Details</div>
+    <div style="overflow: hidden;">
+        <table class="table table-bordered table-hover table-responsive">
+            <tr>
+                <td>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            SITE ID:
+                        </dt>
+                        <dd>
+                            <input id="sid" class="form-control" />
+                        </dd>
+                        <dt>
+                            SITE NAME:
+                        </dt>
+                        <dd>
+                            <input id="sname" />
+                        </dd>
+                        <dt>
+                            CUSTOMER:
+                        </dt>
+                        <dd>
+                            <input id="cust" />
+                        </dd>
+                        <dt>
+                            ENGINE SR. NO:
+                        </dt>
+                        <dd>
+                            <input id="engine_no" />
+                        </dd>
+                        <dt>
+                            DG SET NO:
+                        </dt>
+                        <dd>
+                            <input id="dgno" />
+                        </dd>
+                        <dt>
+                            KVA
+                        </dt>
+                        <dd>
+                            <input id="kva" />
+                        </dd>
+                        <dt>
+                            MODEL
+                        </dt>
+                        <dd>
+                            <input id="model" />
+                        </dd>
+                        <dt>
+                            DT. OF. COMM.
+                        </dt>
+                        <dd>
+                            <input id="doi" />
+                        </dd>
+
+                        <dt>
+                            ALT. MAKE:
+                        </dt>
+                        <dd>
+                            <input id="amake" />
+                        </dd>
+
+                        <dt>
+                            ALT. SR. NO:
+                        </dt>
+                        <dd>
+                            <input id="alsn" />
+                        </dd>
+
+                        <dt>
+                            BATT. SR. NO:
+                        </dt>
+                        <dd>
+                            <input id="bsn" />
+                        </dd>
+                        <dt>
+                            AMC STATUS:
+                        </dt>
+                        <dd>
+                            <input id="amc" />
+                        </dd>
+                        <dt>
+                            WARRANTY STATUS:
+                        </dt>
+                        <dd>
+                            <input id="warr" />
+                        </dd>
+                        <dt>
+                            OEA NAME:
+                        </dt>
+                        <dd>
+                            <input id="oea" />
+                        </dd>
+                        <dt>
+                            DISTRICT:
+                        </dt>
+                        <dd>
+                            <input id="dist" />
+                        </dd>
+
+                        <dt>
+                            STATE:
+                        </dt>
+                        <dd>
+                            <input id="state" />
+                        </dd>
+                    </dl>
+                </td>
+                <td>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            ISSUE TYPE:
+                        </dt>
+                        <dd>
+                            <input id="stype" />
+                        </dd>
+                        <dt>
+                            DT. OF. ISSUE:
+                        </dt>
+                        <dd>
+                            <input id="dos" />
+                        </dd>
+                        <dt>
+                            ISSUE CLOUSER DT.:
+                        </dt>
+                        <dd>
+                            <input id="cdati" />
+                        </dd>
+                        <dt>
+                            ISSUE CATEGORY:
+                        </dt>
+                        <dd>
+                            <input id="ccate" />
+                        </dd>
+                        <dt>
+                            HMR:
+                        </dt>
+                        <dd>
+                            <input id="hmr" />
+                        </dd>
+                        <dt>
+                            ISSUE NATURE:
+                        </dt>
+                        <dd>
+                            <input id="cnat" />
+                        </dd>
+
+                        <dt>
+                            SEVERITY:
+                        </dt>
+                        <dd>
+                            <input id="serv" />
+                        </dd>
+
+                        <dt>
+                            FAILURE REASON:
+                        </dt>
+                        <dd>
+                            <input id="rfail" />
+                        </dd>
+
+                        <dt>
+                            ISSUE STATUS:
+                        </dt>
+                        <dd>
+                            <input id="sta" />
+                        </dd>
+
+                        <dt>
+                            ACTION TAKEN:
+                        </dt>
+                        <dd>
+                            <input id="action" />
+                        </dd>
+
+                        <dt>
+                            TTR:
+                        </dt>
+                        <dd>
+                            <input id="ttr" />
+                        </dd>
+
+                        <dt>
+                            SLA STATUS:
+                        </dt>
+                        <dd>
+                            <input id="sla" />
+                        </dd>
+
+                        <dt>
+                            TIME SLOT:
+                        </dt>
+                        <dd>
+                            <input id="tslot" />
+                        </dd>
+
+                        <dt>
+                            SLA REASON:
+                        </dt>
+                        <dd>
+                            <input id="resla" />
+                        </dd>
+                        <dt>
+                            REPORT NO:
+                        </dt>
+                        <dd>
+                            <input id="report" />
+                        </dd>
+
+                        <dt>
+                            TECHNICIAN:
+                        </dt>
+                        <dd>
+                            <input id="technician" />
+                        </dd>
+
+                        <dt>
+                            METERIAL USED:
+                        </dt>
+                        <dd>
+                            <input id="meterial" />
+                        </dd>
+                        <dt>
+                            REMARKS:
+                        </dt>
+                        <dd>
+                            <input id="rem" />
+                        </dd>
+                    </dl>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input id="Cancel" type="button" value="OK" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div id="dp1" style="margin-left:5px"></div>
+<div id="dv1" class="ui-front" style="margin-top:5px; margin-left:5px">
+    <form method="post" action="/pop/exp_pmr">
+        <input type="text" id="dtFrm" name="sdt" />
+        <input type="text" id="dtTo" name="edt" />
+        <input type="submit" value="Export Data" id="btnEx" />
+        @Html.ActionLink("Back to List", "List", "pop", null, new { @id = "btnBCK" })
+    </form>
+</div>
+
+
+

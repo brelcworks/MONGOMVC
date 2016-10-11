@@ -53,13 +53,13 @@ namespace MONGOMVC.Controllers
             return RedirectToAction("Create");
         }
         [Authorize]
-        public JsonResult dtls(string id)
+        public JsonResult dtls(Int64 id)
         {
             List<BILL> STLIST = new List<BILL>();
             var database = client.GetDatabase("appharbor_9spxvctt");
             var collection = database.GetCollection<BILL>("BILL");
             var builder = Builders<BILL>.Filter;
-            var filter = builder.Eq("BID", id);
+            var filter = builder.Eq("BILLID", id);
             STLIST = collection.Find(filter).ToList();
             return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
@@ -145,13 +145,28 @@ namespace MONGOMVC.Controllers
         [Authorize]
         public JsonResult gtbtot(string aData)
         {
-            List<BILL1> STLIST = new List<BILL1>();
+        	List<BILL1> STLIST = new List<BILL1>();
             var database = client.GetDatabase("appharbor_9spxvctt");
             var collection = database.GetCollection<BILL1>("BILL1");
             var builder = Builders<BILL1>.Filter;
             var filter = builder.Eq("CUST", aData);
-            STLIST = collection.Find(filter).ToList();
-            return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            STLIST = collection.Find(filter).Sort(Builders<BILL1>.Sort.Descending("_id")).ToList();
+            var PM = new BILL1();
+            var rec = STLIST.Count();
+            if (rec >= 1)
+            {
+            	for (int I = 0; I < STLIST.Count; I++)
+            	{
+            		PM= STLIST[0];
+            	}
+            }
+            
+            else {
+            		PM.TOTAL= Convert.ToDecimal("0.00");
+            }
+            return new JsonResult { Data = PM, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        	
+            
         }
         [Authorize]
         public JsonResult getlrec()
@@ -167,6 +182,38 @@ namespace MONGOMVC.Controllers
             {
                 return new JsonResult { Data = ex.ToString(), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult UPDTOT(Int64 aData, decimal TOT)
+        {
+        string message = "";
+        try {
+            var database = client.GetDatabase("appharbor_9spxvctt");
+            var collection = database.GetCollection<BILL1>("BILL1");
+            var builder = Builders<BILL1>.Filter;
+            var FILTER1 = builder.Eq(A=> A.BID, aData);
+            var cust = collection.Find(FILTER1).FirstOrDefault();
+            List<BILL1> STLIST = new List<BILL1>();
+            var FILTER2 = builder.Eq(A=> A.CUST, cust.CUST);
+            STLIST = collection.Find(FILTER2).Sort(Builders<BILL1>.Sort.Descending("_id")).ToList();
+            if (STLIST.Count >= 1) {
+            	var FILTER = builder.Eq(A=> A.BID, STLIST[0].BID);
+            	var upd = Builders<BILL1>.Update.Set("TOTAL", TOT);
+            	var RES = collection.UpdateOne(FILTER, upd);
+            	if (RES.ModifiedCount == 1) {
+            		message= "Successfully Saved!";
+            	}
+            	else
+            	{
+            		message= RES.ModifiedCount.ToString();
+            	}
+            }
+        } catch (Exception EX) {
+        	
+        	message = EX.ToString();
+        }
+        return new JsonResult { Data = message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         [Authorize]
         [HttpPost]

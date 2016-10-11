@@ -88,7 +88,12 @@ namespace MONGOMVC.Models
         public string DPCODE { get; set; }
         public string lmodi { get; set; }
         public string AEDT { get; set; }
+        [Required]
         [DisplayName("REMARKS")]
         public string REM { get; set; }
+        public Nullable<System.DateTime> LSD { get; set; }
+        public Nullable<System.DateTime> NSD { get; set; }
+        public string LHMR { get; set; }
+        public Boolean ISBILL { get; set; }
     }
 }

@@ -271,6 +271,131 @@
             step: 1,
             theme: 'dark'
         });
+        $('#txtREM').focus(function (e) {
+    		var chmd ;
+    		var chmr;
+    		$.ajax({
+                 type: "GET",
+                 url: "@Url.Action("gtbtot", "Pop")",
+                 data: { aData: $("#txtENS").val() },
+               	 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (data) {
+                 var dt = data.DOS;
+                 var date = dt.replace(/[^0-9 +]/g, '');
+                 var date1 = new Date(parseInt(date)); 
+                 chmd = date1;
+                 chmr = data.HMR;
+                 	if (chmd == "") {
+        		alert("BLANK");
+    		}
+    		else {
+        		var start = new Date($('#txtCDATI').val());
+        		var diff = new Date(start - chmd);
+        		var days = diff / 1000 / 60 / 60 / 24;
+        		var difhm = $('#txtHMR').val() - chmr;
+        		var ahm = difhm / days;
+        		var xy = 500 / ahm;
+        		var styp = $('#txtSTYPE').val();
+        		if (xy >= 180) {
+            		$('#txtAHM').val(ahm);
+            		$('#txtPOPCHMR').val($('#txtHMR').val());
+            		$('#txtPOPCHMD').val($('#txtCDATI').val());
+            		start.setDate(start.getDate() + 180);
+            			if (styp == 'OIL SERVICE') {
+                			$('#txtPOPLHMR').val($('#txtHMR').val());
+                			$('#txtPOPLSD').val($('#txtCDATI').val());
+                			var month = new Array();
+                			month[0] = "Jan";
+                			month[1] = "Feb";
+                			month[2] = "Mar";
+                			month[3] = "Apr";
+                			month[4] = "May";
+                			month[5] = "Jun";
+                			month[6] = "Jul";
+                			month[7] = "Aug";
+                			month[8] = "Sep";
+                			month[9] = "Oct";
+                			month[10] = "Nov";
+                			month[11] = "Dec";
+                			var mon1 = month[start.getMonth()];
+                			$('#txtNSD').val(start.getDate() + "-" + mon1 + "-" + start.getFullYear() + " " + start.getHours() + ":" + start.getMinutes());
+            			}
+            			$('#txtLHMR').val($('#txtPOPLHMR').val());
+                $('#txtLSD').val($('#txtPOPLSD').val());
+            $('#txtNSD1').val($('#txtNSD').val());
+        		}
+        		else {
+            		$('#txtAHM').val(ahm);
+            		$('#txtPOPCHMR').val($('#txtHMR').val());
+            		$('#txtPOPCHMD').val($('#txtCDATI').val());
+            		start.setDate(start.getDate() + xy);
+            		if (styp == 'OIL SERVICE') {
+                		$('#txtPOPLHMR').val($('#txtHMR').val());
+                		$('#txtPOPLSD').val($('#txtCDATI').val());
+                		var month = new Array();
+                		month[0] = "Jan";
+                		month[1] = "Feb";
+                		month[2] = "Mar";
+                		month[3] = "Apr";
+                		month[4] = "May";
+                		month[5] = "Jun";
+                		month[6] = "Jul";
+                		month[7] = "Aug";
+                		month[8] = "Sep";
+                		month[9] = "Oct";
+                		month[10] = "Nov";
+                		month[11] = "Dec";
+                		var mon1 = month[start.getMonth()];
+                		$('#txtNSD').val(start.getDate() + "-" + mon1 + "-" + start.getFullYear() + " " + start.getHours() + ":" + start.getMinutes());
+            		}
+            		$('#txtLHMR').val($('#txtPOPLHMR').val());
+                $('#txtLSD').val($('#txtPOPLSD').val());
+            $('#txtNSD1').val($('#txtNSD').val());
+        	}
+    	}
+                 },
+            	error: function OnErrorCall(response) {
+                   alert(response.status + " " + response.statusText);
+                }
+           });
+	});
+
+	$('#txtSLA').keypress(function (e) {
+    	if (e.keyCode == 13) {
+        	$('#txtRESLA').focus();
+        	e.preventDefault();
+    	}
+	});
+
+$('#txtRESLA').keypress(function (e) {
+    if (e.keyCode == 13) {
+        $('#txtREM').focus();
+        e.preventDefault();
+    }
+});
+
+$("#btnDEL").click(function () {
+                        $.ajax({
+                            url: "@Url.Action("DEL_PMR", "Pop")",
+                            type: "POST",
+                            data: { "id": $('#txtRID1').val()},
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.toString() != "Successfully Saved!") {
+                                    alert(data.toString());
+                                }
+                                else {
+                                    alert("Record Deleted!");
+                                    window.location.href = "/Pop/List";
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                alert(xhr.responseText);
+                            }
+                        });
+                        });
+
         $(document).ready(function () {
             $('INPUT[type="text"]').focus(function () {
                 $(this).addClass("focus");
@@ -291,7 +416,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 <fieldset>
-    <h4>ISSUE DETAILS FOR SITE NAME: &nbsp; &nbsp; @Html.DisplayFor(model => model.PMRs.SNAME) | &nbsp; SITE ID: &nbsp; &nbsp; @Html.DisplayFor(model => model.PMRs.SID) &nbsp; &nbsp; | &nbsp; &nbsp; <input type="submit" value="Update" class="btn btn-success btn-xs" /></h4>
+    <h4>ISSUE DETAILS FOR SITE NAME: &nbsp; &nbsp; @Html.DisplayFor(model => model.PMRs.SNAME) | &nbsp; &nbsp; SITE ID: &nbsp; &nbsp; @Html.DisplayFor(model => model.PMRs.SID) &nbsp; &nbsp; | &nbsp; &nbsp; <input type="submit" value="Update" class="btn btn-success btn-xs" /> &nbsp; &nbsp; | &nbsp; &nbsp; <input id="btnDEL" value="Delete" type="button" class="btn btn-danger btn-xs" /> </h4>
     <table class="table table-bordered table-hover table-responsive ui-front">
         <tr>
             <td>
@@ -384,6 +509,13 @@
                     <dd>
                         @Html.TextBoxFor(model => model.PMRs.STATE, new { @class = "form-control input-xs", @id = "txtSTATE" })
                     </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.MAINPOP.nsd)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.MAINPOP.nsd, new { @class = "form-control input-xs", @id = "txtNSD" })
+                    </dd>
+                    @Html.HiddenFor(model => model.MAINPOP.nsd, new { @class = "form-control input-xs", @id = "txtNSD" })
                 </dl>
             </td>
             <td>
@@ -449,26 +581,35 @@
                     <dd>
                         @Html.TextBoxFor(model => model.PMRs.SERV, new { @class = "form-control input-xs", @id = "txtSERV" })
                     </dd>
-
-                    <dt>
-                        @Html.LabelFor(model => model.PMRs.RFAIL)
-                    </dt>
-                    <dd>
-                        @Html.TextBoxFor(model => model.PMRs.RFAIL, new { @class = "form-control input-xs", @id = "txtRFAIL" })
-                    </dd>
-
                     <dt>
                         @Html.LabelFor(model => model.PMRs.STA)
                     </dt>
                     <dd>
                         @Html.TextBoxFor(model => model.PMRs.STA, new { @class = "form-control input-xs", @id = "txtSTA" })
                     </dd>
-
+                    <dt>
+                        @Html.LabelFor(model => model.PMRs.RFAIL)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.PMRs.RFAIL, new { @class = "form-control input-xs", @id = "txtRFAIL" })
+                    </dd>
                     <dt>
                         @Html.LabelFor(model => model.PMRs.ACTION)
                     </dt>
                     <dd>
                         @Html.TextBoxFor(model => model.PMRs.ACTION, new { @class = "form-control input-xs", @id = "txtACTION" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.PMRs.Report)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.PMRs.Report, new { @class = "form-control input-xs", @id = "txtREPORT" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.PMRs.Technician)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.PMRs.Technician, new { @class = "form-control input-xs", @id = "txtTECHNICIAN" })
                     </dd>
                     <dt>
                         @Html.LabelFor(model => model.PMRs.SLA)
@@ -483,23 +624,11 @@
                         @Html.TextBoxFor(model => model.PMRs.RESLA, new { @class = "form-control input-xs", @id = "txtRESLA" })
                     </dd>
                     <dt>
-                        @Html.LabelFor(model => model.PMRs.Report)
-                    </dt>
-                    <dd>
-                        @Html.TextBoxFor(model => model.PMRs.Report, new { @class = "form-control input-xs", @id = "txtREPORT" })
-                    </dd>
-
-                    <dt>
-                        @Html.LabelFor(model => model.PMRs.Technician)
-                    </dt>
-                    <dd>
-                        @Html.TextBoxFor(model => model.PMRs.Technician, new { @class = "form-control input-xs", @id = "txtTECHNICIAN" })
-                    </dd>
-                    <dt>
                         @Html.LabelFor(model => model.PMRs.REM)
                     </dt>
                     <dd>
                         @Html.TextBoxFor(model => model.PMRs.REM, new { @class = "form-control input-xs", @id = "txtREM" })
+                        @Html.ValidationMessageFor(model => model.PMRs.REM)
                     </dd>
                 </dl>
             </td>
@@ -510,6 +639,14 @@
                 @Html.HiddenFor(model => model.PMRs.RECID1, new { @class = "form-control input-xs", @id = "txtRID1" })
                 @Html.HiddenFor(model => model.PMRs.DPCODE, new { @class = "form-control input-xs", @id = "txtDPCODE" })
                 @Html.HiddenFor(model => model.PMRs.SID, new { @class = "form-control input-xs", @id = "txtSID" })
+                @Html.HiddenFor(model => model.PMRs.SNAME)
+                @Html.HiddenFor(model => model.PMRs.lmodi)
+                @Html.HiddenFor(model => model.PMRs.SSTA)
+                @Html.HiddenFor(model => model.PMRs.AEDT)
+                @Html.HiddenFor(model => model.PMRs.LSD, new { @id = "txtLSD" })
+            @Html.HiddenFor(model => model.PMRs.NSD, new { @id = "txtNSD1" })
+            @Html.HiddenFor(model => model.PMRs.LHMR, new { @id = "txtLHMR" })
+            @Html.HiddenFor(model => model.PMRs.ISBILL, new { @id = "txtISBILL" })
                 @Html.HiddenFor(model => model.MAINPOP.RID)
                 @Html.HiddenFor(model => model.MAINPOP.lsd, new { @id = "txtPOPLSD" })
                 @Html.HiddenFor(model => model.MAINPOP.lhmr, new { @id = "txtPOPLHMR" })

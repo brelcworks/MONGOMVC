@@ -109,14 +109,14 @@ namespace MONGOMVC.Controllers
         {
             var database = client.GetDatabase("appharbor_9spxvctt");
             var collection = database.GetCollection<TABLE2>("STOCK");
-            var STLIST = DateTime.Now.ToString("ddMMyyyyhhmmssfff");
+            var STLIST = DateTime.Now.ToString("hhmmssfff");
             return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         public JsonResult gmid1(string aData)
         {
             var database = client.GetDatabase("appharbor_9spxvctt");
             var collection = database.GetCollection<SHEET1>("SHEET1");
-            var STLIST = DateTime.Now.ToString("ddMMyyyyhhmmssfff");
+            var STLIST = DateTime.Now.ToString("hhmmssfff");
             return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         [Authorize]

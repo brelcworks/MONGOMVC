@@ -693,10 +693,7 @@
                                                        contentType: "application/json; charset=utf-8",
                                                        dataType: "json",
                                                        success: function (data) {
-                                                           var i = data.length;
-                                                           $.each(data, function (i, val) {
-                                                               $('#txtTOTAL').val(val.TOTAL);
-                                                           });
+                                                               $('#txtTOTAL').val(data.TOTAL);
                                                        },
                                                        error: function OnErrorCall(response) {
                                                            alert(response.status + " " + response.statusText);
@@ -722,7 +719,7 @@
                        datatype: "json",
                        data: { "bno": $("txtBNO").val() },
                        datafields: [
-                       { name: 'BILLID', type: 'int' },
+                       { name: 'BILLID', type: 'Int64' },
                        { name: 'BID', type: 'string' },
                        { name: 'PART_NO', type: 'string' },
                        { name: 'PARTI', type: 'string' },
@@ -758,7 +755,7 @@
                                     editrow = row;
                                     var offset = $("#grid1").offset();
                                     var dataRecord = $("#grid1").jqxGrid('getrowdata', editrow);
-                                    var ens = dataRecord.BID;
+                                    var ens = dataRecord.BILLID;
                                     var options = { "backdrop": "static", keyboard: true };
                                     $.ajax({
                                         type: "GET",
@@ -832,7 +829,7 @@
                                     });
                                 }
                             },
-                            { text: "RECORD NO", datafield: "BILLID", hidden: true },
+                            { text: "RECORD NO", datafield: "BILLID", hidden: true},
                             { text: "RECORD NO", datafield: "BID", hidden: true },
                                { text: "PART NO", datafield: "PART_NO", minwidth: 80 },
                                { text: "PART NAME", datafield: "PARTI", minwidth: 110 },
@@ -1292,10 +1289,13 @@
                     $('#STGROP1').val(null)
                     $('#STAEDT1').val(null)
                     $('#STUSER11').val(null)
-                    $('#UPDBILL').show();
+                    if (NMODE != false)
+                    {
+                    	EMODE = false;
+                    	$('#UPDBILL').show();
                     $('#NBILL').prop('disabled', true);
                     $('#btnNBILL').prop('disabled', true);
-                    EMODE = false;
+                    }
                     isdel = true;
                     $("#popupWindow1").jqxWindow('hide');
                     $('#searchField').focus();
@@ -1909,17 +1909,7 @@
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function (data) {
-                                var i = data.length;
-                                if (i > 0)
-                                {
-                                    $.each(data, function (i, val) {
-                                        $('#txtTOTAL').val(val.TOTAL);
-                                    });
-                                }
-                                else
-                                {
-                                    $('#txtTOTAL').val("0.00");
-                                }
+                             $('#txtTOTAL').val(data.TOTAL);
                             },
                             error: function OnErrorCall(response) {
                                 alert(response.status + " " + response.statusText);
@@ -2007,10 +1997,13 @@
                     $('#STGROP1').val(null)
                     $('#STAEDT1').val(null)
                     $('#STUSER11').val(null)
-                    $('#UPDBILL').show();
+                    if (NMODE != false)
+                    {
+                    	EMODE = false;
+                    	$('#UPDBILL').show();
                     $('#NBILL').prop('disabled', true);
                     $('#btnNBILL').prop('disabled', true);
-                    EMODE = false;
+                    }
                     isupd = true;
                     $("#popupWindow1").jqxWindow('hide');
                     $('#searchField').focus();
@@ -2251,6 +2244,24 @@
                                     source1.data = { "bno": $('#txtBNO').val() };
                                     $('#grid1').jqxGrid('updatebounddata');
                                     $('#grid').jqxGrid('updatebounddata');
+                                    $.ajax({
+                            			url: "@Url.Action("UPDTOT", "BILL")",
+                            			type: "POST",
+                            			data: { aData: $("#txtBID").val(), TOT : $("#txtTOTAL").val() },
+                            			dataType: "json",
+                            			success: function (data) {
+                                			if (data.toString() != "Successfully Saved!") {
+                                    			alert(data.toString());
+                                			}
+                                			else
+                                			{
+                                			alert(data.toString());
+                                			}
+                            			},
+                            			error: function (response) {
+                                			alert(response.status + " " + response.responseText);
+                            			}
+                        			});
                                     $('#PRINTBILL').click();
                                 }
                             },

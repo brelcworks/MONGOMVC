@@ -373,6 +373,10 @@ $('#txtREM').focus(function (e) {
                 var mon1 = month[start.getMonth()];
                 $('#txtNSD').val(start.getDate() + "-" + mon1 + "-" + start.getFullYear() + " " + start.getHours() + ":" + start.getMinutes());
             }
+            $('#txtLHMR').val($('#txtPOPLHMR').val());
+                $('#txtLSD').val($('#txtPOPLSD').val());
+                $('#txtISBILL').val(false);
+            $('#txtNSD1').val($('#txtNSD').val());
         }
         else {
             $('#txtAHM').val(ahm);
@@ -398,6 +402,10 @@ $('#txtREM').focus(function (e) {
                 var mon1 = month[start.getMonth()];
                 $('#txtNSD').val(start.getDate() + "-" + mon1 + "-" + start.getFullYear() + " " + start.getHours() + ":" + start.getMinutes());
             }
+            $('#txtLHMR').val($('#txtPOPLHMR').val());
+                $('#txtLSD').val($('#txtPOPLSD').val());
+                $('#txtISBILL').val(false);
+            $('#txtNSD1').val($('#txtNSD').val());
         }
     }
 });

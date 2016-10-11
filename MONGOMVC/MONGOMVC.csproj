@@ -522,6 +522,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Scripts\INC\POP_EDT1.js" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="jqwidgets\globalization\globalize.culture.cs-CZ.js" />
     <Content Include="jqwidgets\globalization\globalize.culture.de-DE.js" />
@@ -997,7 +998,7 @@
     <Content Include="Scripts\INC\demos.js" />
     <Content Include="Scripts\INC\LST_POP.js" />
     <Content Include="Scripts\INC\LST_RM.js" />
-    <Content Include="Scripts\INC\POP_EDT1.js" />
+    <Content Include="Scripts\INC\POP_EDT.js" />
     <Content Include="Scripts\INC\POP_EDT2.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
     <Content Include="Scripts\jquery-3.1.0.min.js" />
@@ -1134,6 +1135,7 @@
     <Content Include="Views\Pop\Add_Pmr.cshtml" />
     <Content Include="Views\Pop\View_PMR.cshtml" />
     <Content Include="Views\Pop\PMR_Dtls.cshtml" />
+    <Content Include="Views\Pop\List_rm1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\UPLOAD1\" />
